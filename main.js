@@ -33,19 +33,28 @@ const months = [
   "Декабрь",
 ];
 
-year.textContent = date.getFullYear();
-dayOfWeek.textContent = daysOfWeek[date.getDay()];
+year.textContent = `${date.getFullYear()}`;
+month.textContent = `\'${months[date.getMonth()]} (${date.getMonth()})\'`;
 dayOfMonth.textContent = date.getDate();
-month.textContent = `${months[date.getMonth()]} (${date.getMonth()})`;
+dayOfWeek.textContent = `\'${daysOfWeek[date.getDay()]}\'`;
 hour.textContent = date.getHours();
-minutes.textContent = date.getMinutes();
 
 let secondsStorage = date.getSeconds();
+let minutesStorage = date.getMinutes();
+
+minutes.textContent = minutesStorage;
 seconds.textContent = secondsStorage;
+
 setInterval(() => {
   secondsStorage += 1;
   seconds.textContent = secondsStorage;
-  if (secondsStorage > 59) {
+  minutes.textContent = minutesStorage;
+  if (secondsStorage > 58) {
     secondsStorage = 0;
+    minutesStorage += 1;
   }
 }, 1000);
+
+setTimeout(() => {
+  window.location.href = '';
+}, 300000)
