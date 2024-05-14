@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3b4252;
+  color: white;
+  height: 100svh;
+  font-size: 22px;
+  font-family: "Fira Code", monospace;
+}
+
+.clock {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.key {
+  color: #e85e55;
+}
+
+/* .value {
+    color: #97dd89;
+} */
+
+.bracket {
+  color: #f5d40e;
+}
+
+#assigment {
+  color: #9190eb;
+}
