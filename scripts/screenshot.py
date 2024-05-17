@@ -17,8 +17,6 @@ def take_screenshot(url, save_path):
         driver.set_window_size(1920, 1080)
 
         driver.save_screenshot(save_path)
-        print("Скриншот сохранен в", save_path)
-
     finally:
         driver.quit()
 
