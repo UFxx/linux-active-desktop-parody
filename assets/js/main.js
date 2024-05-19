@@ -39,7 +39,9 @@ year.textContent = `${date.getFullYear()}`;
 month.textContent = `\'${months[date.getMonth()]} (${date.getMonth() + 1})\'`;
 nextMonth.textContent = `// --> ${months[date.getMonth() + 1]}`;
 dayOfMonth.textContent = date.getDate();
-dayOfWeek.textContent = `\'${daysOfWeek[date.getDay() - 1]}\'`;
+date.getDay() - 1 === -1
+  ? (dayOfWeek.textContent = "\'Воскресенье\'")
+  : (dayOfWeek.textContent = `\'${daysOfWeek[date.getDay() - 1]}\'`);
 nextDayOfWeek.textContent = `// --> ${daysOfWeek[date.getDay()]}`;
 hours.textContent = date.getHours();
 minutes.textContent = date.getMinutes();
