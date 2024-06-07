@@ -4,8 +4,8 @@
 
 <h2>🛠️ Installation Steps:</h2>
 
-<p>1. Install Variety</p>
 <p>Ubuntu</p>
+<p>1. Install Variety</p>
 
 ```
 sudo apt install variety
@@ -31,8 +31,17 @@ pip install selenium
 
 <p>7. Launch start.sh</p>
 
+<p>Windows</p>
   
-  
+<p>1. Install Selenium</p>
+
+```
+pip install selenium
+```
+<p>2. Change wallpapers path in wallpapers.pyw (33 string)</p>
+
+<p>3. Install wallpapers.pyw in the startup</p>
+
 <h2>💻 Built with</h2>
 
 Technologies used in the project:
