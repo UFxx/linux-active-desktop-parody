@@ -1,38 +1,38 @@
-const year = document.querySelector("#year");
-const dayOfWeek = document.querySelector("#week-day");
-const nextDayOfWeek = document.querySelector("#next-week-day");
-const dayOfMonth = document.querySelector("#month-day");
-const month = document.querySelector("#month");
-const nextMonth = document.querySelector("#next-month");
-const hours = document.querySelector("#hours");
-const minutes = document.querySelector("#minutes");
-const seconds = document.querySelector("#seconds");
+const year = document.querySelector('#year');
+const dayOfWeek = document.querySelector('#week-day');
+const nextDayOfWeek = document.querySelector('#next-week-day');
+const dayOfMonth = document.querySelector('#month-day');
+const month = document.querySelector('#month');
+const nextMonth = document.querySelector('#next-month');
+const hours = document.querySelector('#hours');
+const minutes = document.querySelector('#minutes');
+const seconds = document.querySelector('#seconds');
 
-const date = new Date();
+let date = new Date();
 
 const daysOfWeek = [
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
-  "Воскресенье",
+  'Понедельник',
+  'Вторник',
+  'Среда',
+  'Четверг',
+  'Пятница',
+  'Суббота',
+  'Воскресенье'
 ];
 
 const months = [
-  "Январь",
-  "Февраль",
-  "Март",
-  "Апрель",
-  "Май",
-  "Июнь",
-  "Июль",
-  "Август",
-  "Сентябрь",
-  "Октябрь",
-  "Ноябрь",
-  "Декабрь",
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь'
 ];
 
 year.textContent = `${date.getFullYear()}`;
@@ -40,7 +40,7 @@ month.textContent = `\'${months[date.getMonth()]} (${date.getMonth() + 1})\'`;
 nextMonth.textContent = `// --> ${months[date.getMonth() + 1]}`;
 dayOfMonth.textContent = date.getDate();
 date.getDay() - 1 === -1
-  ? (dayOfWeek.textContent = "\'Воскресенье\'")
+  ? (dayOfWeek.textContent = "'Воскресенье'")
   : (dayOfWeek.textContent = `\'${daysOfWeek[date.getDay() - 1]}\'`);
 nextDayOfWeek.textContent = `// --> ${daysOfWeek[date.getDay()]}`;
 hours.textContent = date.getHours();
@@ -64,3 +64,19 @@ if (hours.textContent.length === 1) {
 } else if (hours.textContent.length > 1) {
   hours.textContent = `${date.getHours()}`;
 }
+
+setInterval(() => {
+  if (parseInt(seconds.textContent) > 58) {
+    minutes.textContent = parseInt(minutes.textContent) + 1;
+    seconds.textContent = 0;
+    seconds.textContent = `0${parseInt(seconds.textContent) + 1}`;
+  }
+  if (parseInt(seconds.textContent) > 8) {
+    seconds.textContent = parseInt(seconds.textContent) + 1;
+  } else if (parseInt(seconds.textContent) >= 0) {
+    seconds.textContent = `0${parseInt(seconds.textContent) + 1}`;
+  }
+  if (parseInt(minutes.textContent) > 59) {
+    window.location.href = '/';
+  }
+}, 1000);

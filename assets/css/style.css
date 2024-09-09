@@ -4,6 +4,10 @@
   font-size: 22px;
 }
 
+*::selection {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 body {
   position: relative;
   display: flex;
