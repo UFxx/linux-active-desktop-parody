@@ -1,14 +1,28 @@
-const randomImg = Math.round(Math.random() * 2) + 1;
+var CACHE_NAME = 'my-site-cache-v1';
+var urlsToCache = ['/index.html'];
+// Кэшируем файлы при установке Service Worker
+self.addEventListener('install', function (event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      console.log('Opened cache');
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
 
-function checkOnline() {
-  if (!navigator.onLine) {
-    const imgContainer = document.createElement("div");
-    imgContainer.classList.add("offline-img-container");
-    const img = document.createElement("img");
-    img.setAttribute("src", `./assets/img/offline-wallpapers${randomImg}.png`);
-    img.setAttribute("alt", "offline img");
-
-    imgContainer.appendChild(img);
-    document.body.appendChild(imgContainer);
-  }
-}
+// Загружаем кэшированные файлы при запросе
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      // Возвращаем файл из кэша, если он найден
+      if (response) {
+        return response;
+      }
+      // Попробуем загрузить файл с сервера
+      return fetch(event.request).catch(function () {
+        // Если загрузка не удалась (например, отсутствует интернет), возвращаем оффлайн страницу
+        return caches.match('/index.html');
+      });
+    })
+  );
+});
