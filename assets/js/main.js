@@ -1,14 +1,3 @@
-if (navigator.serviceWorker) {
-  navigator.serviceWorker
-    .register('./assets/js/checkOnline.js')
-    .then((registration) => {
-      console.log('Service worker registered:', registration);
-    })
-    .catch((error) => {
-      console.log('Error registering service worker:', error);
-    });
-}
-
 const year = document.querySelector('#year');
 const dayOfWeek = document.querySelector('#week-day');
 const nextDayOfWeek = document.querySelector('#next-week-day');
