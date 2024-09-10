@@ -14,40 +14,51 @@ function App() {
   })();
 
   return (
-    <div className="clock">
-      <p>
-        <span className="const">const</span>{' '}
-        <span className="object-name">Clock</span>{' '}
-        <span className="equal">=</span> <span className="brackets">{'{'}</span>
-      </p>
-      <div className="object-properties">
-        <ObjectProperty propertyKey="Year" propertyValue={date.getFullYear()} />
-        <ObjectProperty
-          propertyKey="Month"
-          propertyValue={`"${months[date.getMonth()]} (${date.getMonth()})"`}
-        />
-        <ObjectProperty
-          propertyKey="DayOfMonth"
-          propertyValue={date.getDate()}
-        />
-        <ObjectProperty
-          propertyKey="DayOfWeek"
-          propertyValue={`"${
-            date.getDay() - 1 === -1
-              ? 'Воскресенье'
-              : daysOfWeek[date.getDay() - 1]
-          }"`}
-        />
-        <ObjectProperty propertyKey="Hours" propertyValue={date.getHours()} />
-        <ObjectProperty
-          propertyKey="Minutes"
-          propertyValue={date.getMinutes()}
-        />
-        <ObjectProperty propertyKey="Seconds" propertyValue={seconds} />
+    <div
+      className="container"
+      onContextMenu={(e) => {
+        e.preventDefault();
+      }}
+    >
+      <div className="clock">
+        <p>
+          <span className="const">const</span>{' '}
+          <span className="object-name">Clock</span>{' '}
+          <span className="equal">=</span>{' '}
+          <span className="brackets">{'{'}</span>
+        </p>
+        <div className="object-properties">
+          <ObjectProperty
+            propertyKey="Year"
+            propertyValue={date.getFullYear()}
+          />
+          <ObjectProperty
+            propertyKey="Month"
+            propertyValue={`"${months[date.getMonth()]} (${date.getMonth()})"`}
+          />
+          <ObjectProperty
+            propertyKey="DayOfMonth"
+            propertyValue={date.getDate()}
+          />
+          <ObjectProperty
+            propertyKey="DayOfWeek"
+            propertyValue={`"${
+              date.getDay() - 1 === -1
+                ? 'Воскресенье'
+                : daysOfWeek[date.getDay() - 1]
+            }"`}
+          />
+          <ObjectProperty propertyKey="Hours" propertyValue={date.getHours()} />
+          <ObjectProperty
+            propertyKey="Minutes"
+            propertyValue={date.getMinutes()}
+          />
+          <ObjectProperty propertyKey="Seconds" propertyValue={seconds} />
+        </div>
+        <p>
+          <span className="brackets">{'}'};</span>
+        </p>
       </div>
-      <p>
-        <span className="brackets">{'}'};</span>
-      </p>
     </div>
   );
 }

@@ -19,7 +19,9 @@ function ObjectProperty(props: Props) {
             : props.propertyValue
           : props.propertyValue}
       </span>
-      <span className="equal">,</span>
+      <span className="equal">
+        {props.propertyKey === 'Seconds' ? '' : ','}
+      </span>
     </div>
   );
 }
