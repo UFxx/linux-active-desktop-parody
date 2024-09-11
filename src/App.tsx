@@ -34,7 +34,10 @@ function App() {
           />
           <ObjectProperty
             propertyKey="Month"
-            propertyValue={`"${months[date.getMonth()]} (${date.getMonth()})"`}
+            propertyValue={`"${
+              months[date.getMonth()][0]
+            } (${date.getMonth()})"`}
+            commentValue={months[date.getMonth()][1]}
           />
           <ObjectProperty
             propertyKey="DayOfMonth"
@@ -42,11 +45,8 @@ function App() {
           />
           <ObjectProperty
             propertyKey="DayOfWeek"
-            propertyValue={`"${
-              date.getDay() - 1 === -1
-                ? 'Воскресенье'
-                : daysOfWeek[date.getDay() - 1]
-            }"`}
+            propertyValue={`"${daysOfWeek[date.getDay() - 1][0]}"`}
+            commentValue={daysOfWeek[date.getDay() - 1][1]}
           />
           <ObjectProperty propertyKey="Hours" propertyValue={date.getHours()} />
           <ObjectProperty

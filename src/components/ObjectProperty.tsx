@@ -1,6 +1,7 @@
 interface Props {
   propertyKey: string;
   propertyValue: string | number;
+  commentValue?: string;
 }
 
 function ObjectProperty(props: Props) {
@@ -14,6 +15,9 @@ function ObjectProperty(props: Props) {
           : props.propertyValue}
       </span>
       <span className="equal">{props.propertyKey !== 'Seconds' && ','}</span>
+      {typeof props.propertyValue === 'string' && props.commentValue && (
+        <span className="comment">{` // --> ${props.commentValue}`}</span>
+      )}
     </div>
   );
 }
