@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ObjectProperty from './components/ObjectProperty';
 import { months, daysOfWeek } from './storage';
 
 function App() {
-  const [seconds, setSeconds] = useState(new Date().getSeconds());
-
   const date = new Date();
+  const [seconds, setSeconds] = useState(date.getSeconds());
 
-  (function updateSeconds(): void {
-    setInterval(() => {
+  useEffect(() => {
+    const updateSeconds = setInterval(() => {
       setSeconds(new Date().getSeconds());
     }, 1000);
-  })();
+
+    return () => {
+      clearInterval(updateSeconds);
+    };
+  }, [seconds]);
 
   return (
     <div
