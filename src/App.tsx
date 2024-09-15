@@ -58,8 +58,16 @@ function App() {
           />
           <ObjectProperty
             propertyKey="DayOfWeek"
-            propertyValue={`"${daysOfWeek[date.getDay() - 1][0]}"`}
-            commentValue={daysOfWeek[date.getDay() - 1][1]}
+            propertyValue={`"${
+              date.getDay() === 0
+                ? daysOfWeek[daysOfWeek.length - 1][0]
+                : daysOfWeek[date.getDay() - 1][0]
+            }"`}
+            commentValue={
+              date.getDay() === 0
+                ? daysOfWeek[daysOfWeek.length - 1][1]
+                : daysOfWeek[date.getDay() - 1][1]
+            }
           />
           <ObjectProperty propertyKey="Hours" propertyValue={date.getHours()} />
           <ObjectProperty
