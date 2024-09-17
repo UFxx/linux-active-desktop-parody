@@ -13,9 +13,10 @@ function ObjectProperty(props: Props) {
         {typeof props.propertyValue === 'number' && props.propertyValue < 10
           ? '0' + props.propertyValue
           : props.propertyValue}
+        {props.propertyKey === 'WeekNumber' ? `/52` : null}
       </span>
       <span className="equal">{props.propertyKey !== 'Seconds' && ','}</span>
-      {typeof props.propertyValue === 'string' && props.commentValue && (
+      {props.commentValue && (
         <span className="comment">{` // --> ${props.commentValue}`}</span>
       )}
     </div>

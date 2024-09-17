@@ -44,7 +44,11 @@ function App() {
             propertyKey="Year"
             propertyValue={date.getFullYear()}
           />
-          <ObjectProperty propertyKey="WeekNumber" propertyValue={weekNumber} />
+          <ObjectProperty
+            propertyKey="WeekNumber"
+            propertyValue={weekNumber}
+            commentValue={`${52 - weekNumber}`}
+          />
           <ObjectProperty
             propertyKey="Month"
             propertyValue={`"${
