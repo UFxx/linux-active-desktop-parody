@@ -51,9 +51,9 @@ function App() {
           />
           <ObjectProperty
             propertyKey="Month"
-            propertyValue={`"${
-              months[date.getMonth()][0]
-            } (${date.getMonth()})"`}
+            propertyValue={`"${months[date.getMonth()][0]} (${
+              date.getMonth() + 1
+            })"`}
             commentValue={months[date.getMonth()][1]}
           />
           <ObjectProperty
