@@ -5,3 +5,5 @@
 	font-family: 'Fira Code';
 	color: white;
 }
+*::selection { background: #AAAAAA50; }
+*::-moz-selection { background: #AAAAAA50; }
