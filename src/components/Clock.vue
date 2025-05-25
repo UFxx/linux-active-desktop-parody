@@ -1,36 +1,32 @@
 <script setup>
-import { computed, ref } from 'vue';
-import ClockItem from './ClockItem.vue';
+	import { computed, ref } from 'vue';
+	import ClockItem from './ClockItem.vue';
 
-const date = ref(new Date());
+	const date = ref(new Date());
 
-const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+	const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+	const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 
-const clock = computed(() => {
-	const currentDate = date.value;
-	return {
-		year: currentDate.getFullYear(),
-		weekNumber: Math.floor(((currentDate.getMonth() + 1) * 30) / 7),
-		month: `${months[currentDate.getMonth()]} (${currentDate.getMonth()})`,
-		dayOfMonth: currentDate.getDate(),
-		dayOfWeek: daysOfWeek[currentDate.getDay() - 1 === -1 ? 0 : currentDate.getDay() - 1],
-		hours: currentDate.getHours(),
-		minutes: currentDate.getMinutes(),
-		seconds: currentDate.getSeconds()
-  };
-});
+	const clock = computed(() => {
+		const currentDate = date.value;
+		return {
+			year: currentDate.getFullYear(),
+			weekNumber: Math.floor(((currentDate.getMonth() + 1) * 30) / 7),
+			month: `${months[currentDate.getMonth()]} (${currentDate.getMonth()})`,
+			dayOfMonth: currentDate.getDate(),
+			dayOfWeek: daysOfWeek[currentDate.getDay() - 1 === -1 ? 0 : currentDate.getDay() - 1],
+			hours: currentDate.getHours(),
+			minutes: currentDate.getMinutes(),
+			seconds: currentDate.getSeconds()
+		};
+	});
 
-const propNames = computed(() => Object.keys(clock.value));
+	const propNames = computed(() => Object.keys(clock.value));
 
-const isLastProp = computed(() => (name) => name === propNames.value[propNames.value.length - 1]);
-const getPropType = computed(() => (prop) => /[a-zа-яё]/i.test(prop));
+	const isLastProp = computed(() => (name) => name === propNames.value[propNames.value.length - 1]);
+	const getPropType = computed(() => (prop) => /[a-zа-яё]/i.test(prop));
 
-setInterval(() => {
-  date.value = new Date();
-}, 1000);
-
-
+	setInterval(() => date.value = new Date(), 1000);
 </script>
 
 <template>

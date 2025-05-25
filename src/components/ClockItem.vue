@@ -25,9 +25,7 @@
 
 		p { color: white; }
 
-		&:hover .prop-value {
-			text-shadow: 0px 0px 20px currentColor;
-		}
+		&:hover .prop-value { text-shadow: 0px 0px 20px currentColor; }
 	}
 
 	.prop-name {
@@ -37,12 +35,7 @@
 	.prop-value {
 		transition: .3s ease text-shadow;
 
-		&__text {
-			color: $text !important;
-		}
-
-		&__number {
-			color: $number !important;
-		}
+		&__text { color: $text !important; }
+		&__number { color: $number !important; }
 	}
 </style>
