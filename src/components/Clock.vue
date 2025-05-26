@@ -11,8 +11,8 @@
 		const currentDate = date.value;
 		return {
 			year: currentDate.getFullYear(),
-			weekNumber: Math.floor(((currentDate.getMonth() + 1) * 30) / 7),
-			month: `${months[currentDate.getMonth()]} (${currentDate.getMonth()})`,
+			weekNumber: Math.ceil(((currentDate.getMonth() + 1) * 30) / 7),
+			month: `${months[currentDate.getMonth()]} (${currentDate.getMonth() + 1})`,
 			dayOfMonth: currentDate.getDate(),
 			dayOfWeek: daysOfWeek[currentDate.getDay() - 1 === 6 ? daysOfWeek.length - 1 : currentDate.getDay() - 1],
 			hours: currentDate.getHours(),
@@ -23,8 +23,9 @@
 
 	const propNames = computed(() => Object.keys(clock.value));
 
+	const formatTime = computed(() => (time) => time.toString().length === 1 ? `0${time}` : time);
 	const isLastProp = computed(() => (name) => name === propNames.value[propNames.value.length - 1]);
-	const getPropType = computed(() => (prop) => /[a-zа-яё]/i.test(prop));
+	const isString = computed(() => (prop) => /[a-zа-яё]/i.test(prop));
 
 	setInterval(() => date.value = new Date(), 1000);
 </script>
@@ -36,9 +37,9 @@
 			<ClockItem
 				v-for="name in propNames"
 				:objectPropName="name"
-				:propValue="clock[name]"
+				:propValue="formatTime(clock[name])"
 				:isLastProp="isLastProp(name)"
-				:propType="getPropType(clock[name])"
+				:isString="isString(clock[name])"
 			/>
 		</div>
 	<p><span class="clock-brackets">}</span>;</p>

@@ -1,16 +1,16 @@
 <script setup>
 	import { computed } from 'vue';
 
-	const props = defineProps(['objectPropName', 'propValue', 'isLastProp', 'propType'])
+	const props = defineProps(['objectPropName', 'propValue', 'isLastProp', 'isString'])
 
-	const getPropType = computed(() => props.propType ? 'prop-value__text' : 'prop-value__number')
-	const formattedPropValue = computed(() => props.propType ? `"${props.propValue}"` : props.propValue)
+	const getClassBasedOnPropType = computed(() => props.isString ? 'prop-value__text' : 'prop-value__number')
+	const formattedPropValue = computed(() => props.isString ? `"${props.propValue}"` : props.propValue)
 </script>
 
 <template>
 	<div class="item">
 			<p class="prop-name">{{ objectPropName }}:</p>
-			<p class="prop-value" :class="getPropType">&nbsp;{{ formattedPropValue }}</p>
+			<p class="prop-value" :class="getClassBasedOnPropType">&nbsp;{{ formattedPropValue }}</p>
 			<p class="comma" v-if="!props.isLastProp">,</p>
 	</div>
 </template>
