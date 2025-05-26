@@ -22,10 +22,12 @@
 		line-height: 36px;
 		font-size: 24px;
 		cursor: context-menu;
+		@include transition($prop: text-shadow);
 
 		p { color: white; }
 
-		&:hover .prop-value { text-shadow: 0px 0px 20px currentColor; }
+		&:hover .prop-value,
+		&:hover { text-shadow: 0px 0px 20px currentColor; }
 	}
 
 	.prop-name {
@@ -33,7 +35,7 @@
 	}
 
 	.prop-value {
-		transition: .3s ease text-shadow;
+		@include transition($prop: text-shadow);
 
 		&__text { color: $text !important; }
 		&__number { color: $number !important; }

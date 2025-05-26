@@ -14,7 +14,7 @@
 			weekNumber: Math.floor(((currentDate.getMonth() + 1) * 30) / 7),
 			month: `${months[currentDate.getMonth()]} (${currentDate.getMonth()})`,
 			dayOfMonth: currentDate.getDate(),
-			dayOfWeek: daysOfWeek[currentDate.getDay() - 1 === -1 ? 0 : currentDate.getDay() - 1],
+			dayOfWeek: daysOfWeek[currentDate.getDay() - 1 === 6 ? daysOfWeek.length - 1 : currentDate.getDay() - 1],
 			hours: currentDate.getHours(),
 			minutes: currentDate.getMinutes(),
 			seconds: currentDate.getSeconds()
@@ -56,6 +56,10 @@
 		p {
 			font-size: 24px;
 			line-height: 36px;
+			cursor: context-menu;
+
+			& * { @include transition($prop: text-shadow); }
+			&:hover * { text-shadow: 0px 0px 20px currentColor; }
 		}
 
 		&-declaration { color: $declaration; }
