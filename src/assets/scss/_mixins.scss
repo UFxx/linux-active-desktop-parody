@@ -1,1 +1,15 @@
-@mixin transition($time: 0.3, $prop) { transition: $time+s ease $prop; }
+@use "sass:list";
+
+@mixin tr($time: 0.3, $props...) {
+	$transitions: ();
+
+	@each $prop in $props {
+		$transitions: list.append($transitions, #{$time}s ease $prop, comma);
+	}
+
+	transition: $transitions;
+}
+
+@mixin var($prop, $variableName) {
+	#{$prop}: var(--#{$variableName});
+}

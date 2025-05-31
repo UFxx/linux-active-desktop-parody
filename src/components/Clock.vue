@@ -14,7 +14,8 @@
 			weekNumber: Math.ceil(((currentDate.getMonth() + 1) * 30) / 7),
 			month: `${months[currentDate.getMonth()]} (${currentDate.getMonth() + 1})`,
 			dayOfMonth: currentDate.getDate(),
-			dayOfWeek: daysOfWeek[currentDate.getDay() - 1 === 6 ? daysOfWeek.length - 1 : currentDate.getDay() - 1],
+			dayOfWeek:
+				daysOfWeek[currentDate.getDay() - 1 === 6 ? daysOfWeek.length - 1 : currentDate.getDay() - 1],
 			hours: currentDate.getHours(),
 			minutes: currentDate.getMinutes(),
 			seconds: currentDate.getSeconds()
@@ -22,17 +23,19 @@
 	});
 
 	const propNames = computed(() => Object.keys(clock.value));
-
 	const formatTime = computed(() => (time) => time.toString().length === 1 ? `0${time}` : time);
 	const isLastProp = computed(() => (name) => name === propNames.value[propNames.value.length - 1]);
 	const isString = computed(() => (prop) => /[a-zа-яё]/i.test(prop));
 
-	setInterval(() => date.value = new Date(), 1000);
+	setInterval(() => (date.value = new Date()), 1000);
 </script>
 
 <template>
 	<div class="clock">
-		<p><span class="clock-declaration">const</span> <span class="clock-variable-name">Clock</span> <span class="clock-equal">=</span> <span class="clock-brackets">{</span></p>
+		<p>
+			<span class="clock-declaration">const</span> <span class="clock-variable-name">Clock </span>
+			<span class="clock-equal">=</span> <span class="clock-brackets">{</span>
+		</p>
 		<div class="clock-content">
 			<ClockItem
 				v-for="name in propNames"
@@ -42,11 +45,11 @@
 				:isString="isString(clock[name])"
 			/>
 		</div>
-	<p><span class="clock-brackets">}</span>;</p>
+	<p><span class="clock-brackets">}</span><span class="clock-semicolon">;</span></p>
 	</div>
 </template>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 	.clock {
 		display: flex;
 		flex-direction: column;
@@ -59,13 +62,15 @@
 			line-height: 36px;
 			cursor: context-menu;
 
-			& * { @include transition($prop: text-shadow); }
+			& * { @include tr(0.3, text-shadow, color); }
 			&:hover * { text-shadow: 0px 0px 20px currentColor; }
 		}
 
-		&-declaration { color: $declaration; }
-		&-variable-name { color: $variableName; }
-		&-equal { color: $equal; }
-		&-brackets { color: $brackets; }
+		&-declaration { @include var(color, declaration); }
+		&-variable-name { @include var(color, variableName); }
+		&-prop-name { @include var(color, propName) }
+		&-equal { @include var(color, equal) }
+		&-brackets { @include var(color, brackets) }
+		&-semicolon { @include var(color, semicolon) }
 	}
 </style>

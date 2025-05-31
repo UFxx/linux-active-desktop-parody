@@ -1,4 +1,4 @@
-html { background-color: $backgroundColor; }
+html { @include var(background-color, backgroundColor); }
 
 * {
 	margin: 0;
@@ -6,5 +6,7 @@ html { background-color: $backgroundColor; }
 	box-sizing: border-box;
 	font-family: 'Fira Code';
 	color: white;
+
+	&::selection { background-color: #AAAAAA50; }
+	&::-moz-selection { background-color: #AAAAAA50; }
 }
-*::selection, *::-moz-selection { background: #AAAAAA50; }
