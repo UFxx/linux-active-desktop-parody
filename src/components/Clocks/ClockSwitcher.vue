@@ -2,6 +2,7 @@
 	import { ref, reactive, computed, onMounted } from 'vue';
 	import CodeClock from './CodeClock.vue';
 	import ElectronicClock from './ElectronicClock.vue';
+	import AnalogClock from './AnalogClock.vue';
 
 	const props = defineProps(['clock']);
 
@@ -53,6 +54,12 @@
 		/>
 		<ElectronicClock
 			v-if="activeClocks === 'electronic'"
+			:hours="props.clock.hours"
+			:minutes="props.clock.minutes"
+			:seconds="props.clock.seconds"
+		/>
+		<AnalogClock
+			v-if="activeClocks === 'analog'"
 			:hours="props.clock.hours"
 			:minutes="props.clock.minutes"
 			:seconds="props.clock.seconds"

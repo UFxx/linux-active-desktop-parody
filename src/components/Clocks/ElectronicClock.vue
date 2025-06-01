@@ -24,6 +24,7 @@
 			span {
 				opacity: 0.7;
 				@include var(color, number);
+				@include tr(0.3, color);
 
 				&:hover {
 					opacity: 1;

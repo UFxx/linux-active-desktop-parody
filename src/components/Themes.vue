@@ -38,6 +38,8 @@
 
 	const activeTheme = computed(() => themes.find((theme) => theme.isActive));
 	const colorsNamesFromActiveTheme = computed(() => Object.getOwnPropertyNames(activeTheme.value.colors))
+	const isActiveThemeIcon = computed(() => (theme) => theme.isActive ? 'active' : '');
+	const isExpanded = computed(() => (isCircleExpanded) => isCircleExpanded ? 'expanded' : '');
 
 	function changeActiveTheme(idx) {
 		if (!isCircleExpanded.value) {
@@ -75,13 +77,13 @@
 		<div
 			v-for="(theme, i) in themes"
 			:key="theme.name"
-			:class="['theme-icon', theme.name, theme.isActive ? 'active' : '']"
+			:class="['theme-icon', theme.name, isActiveThemeIcon(theme)]"
 			@click="() => changeActiveTheme(i)"
 		>
 		</div>
 	</div>
 	<div
-		:class="['change-theme-circle', activeTheme.name, isCircleExpanded ? 'expanded' : '']"
+		:class="['change-theme-circle', activeTheme.name, isExpanded(isCircleExpanded)]"
 		ref="themeAnimationCircle"
 	/>
 </template>
