@@ -4,7 +4,6 @@ html { @include var(background-color, backgroundColor); }
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Fira Code';
 	color: white;
 
 	&::selection { background-color: #AAAAAA50; }
