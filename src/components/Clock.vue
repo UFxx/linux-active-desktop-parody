@@ -15,7 +15,7 @@
 			month: `${months[currentDate.getMonth()]} (${currentDate.getMonth() + 1})`,
 			dayOfMonth: currentDate.getDate(),
 			dayOfWeek:
-				daysOfWeek[currentDate.getDay() - 1 === 6 ? daysOfWeek.length - 1 : currentDate.getDay() - 1],
+				daysOfWeek[currentDate.getDay() - 1 === undefined ? currentDate.getDay() : daysOfWeek.length - 1],
 			hours: currentDate.getHours(),
 			minutes: currentDate.getMinutes(),
 			seconds: currentDate.getSeconds()
@@ -23,7 +23,7 @@
 	});
 
 	const propNames = computed(() => Object.keys(clock.value));
-	const formatTime = computed(() => (time) => time.toString().length === 1 ? `0${time}` : time);
+	const formatTime = computed(() => (time) => time.toString().length === 1 ? `0${time}` : time.toString());
 	const isLastProp = computed(() => (name) => name === propNames.value[propNames.value.length - 1]);
 	const isString = computed(() => (prop) => /[a-zа-яё]/i.test(prop));
 
