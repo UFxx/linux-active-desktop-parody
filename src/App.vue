@@ -16,7 +16,7 @@
 			month: `${months[currentDate.getMonth()]} (${currentDate.getMonth() + 1})`,
 			dayOfMonth: currentDate.getDate(),
 			dayOfWeek:
-				daysOfWeek[currentDate.getDay() - 1 === undefined ? currentDate.getDay() : daysOfWeek.length - 1],
+				daysOfWeek[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1],
 			hours: currentDate.getHours(),
 			minutes: currentDate.getMinutes(),
 			seconds: currentDate.getSeconds()

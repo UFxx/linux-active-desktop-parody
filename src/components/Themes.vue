@@ -37,7 +37,7 @@
 	const isCircleExpanded = ref(false);
 
 	const activeTheme = computed(() => themes.find((theme) => theme.isActive));
-	const colorsNamesFromActiveTheme = computed(() => Object.getOwnPropertyNames(activeTheme.value.colors))
+	const colorsNamesFromActiveTheme = computed(() => Object.getOwnPropertyNames(activeTheme.value.colors));
 	const isActiveThemeIcon = computed(() => (theme) => theme.isActive ? 'active' : '');
 	const isExpanded = computed(() => (isCircleExpanded) => isCircleExpanded ? 'expanded' : '');
 
