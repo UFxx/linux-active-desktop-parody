@@ -29,7 +29,7 @@
 
 <template>
 		<ClockSwitcher :clock="clock" />
-		<Themes />
+		<Themes :hours="clock.hours" />
 </template>
 
 <style lang="scss" scoped></style>

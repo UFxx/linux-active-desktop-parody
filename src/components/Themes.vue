@@ -1,5 +1,7 @@
 <script setup>
-	import { reactive, computed, watch, ref, onMounted } from 'vue';
+	import { reactive, computed, watch, ref, onMounted, onUpdated } from 'vue';
+
+	const props = defineProps(['hours']);
 
 	const themes = reactive([
 		{
@@ -70,6 +72,8 @@
 			changeActiveTheme(localStorage.getItem('activeTheme'));
 		}
 	})
+
+	onUpdated(() => props.hours > 16 ? changeActiveTheme(1) : changeActiveTheme(0));
 </script>
 
 <template>
