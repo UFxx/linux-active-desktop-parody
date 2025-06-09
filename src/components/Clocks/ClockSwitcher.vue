@@ -99,7 +99,7 @@
 
 	.clock-switcher__container {
 		position: absolute;
-		right: 150px;
+		right: 180px;
 		top: 45px;
 		text-align: center;
 

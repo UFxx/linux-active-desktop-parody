@@ -3,6 +3,10 @@
 
 	const props = defineProps(['hours']);
 
+	const isThemesLocked = ref(true);
+	const themeAnimationCircle = ref(null);
+	const isCircleExpanded = ref(false);
+
 	const themes = reactive([
 		{
 			name: 'black',
@@ -35,8 +39,6 @@
 			}
 		}
 	]);
-	const themeAnimationCircle = ref(null);
-	const isCircleExpanded = ref(false);
 
 	const activeTheme = computed(() => themes.find((theme) => theme.isActive));
 	const colorsNamesFromActiveTheme = computed(() => Object.getOwnPropertyNames(activeTheme.value.colors));
@@ -44,14 +46,13 @@
 	const isExpanded = computed(() => (isCircleExpanded) => isCircleExpanded ? 'expanded' : '');
 
 	function changeActiveTheme(idx) {
-		if (!isCircleExpanded.value) {
-			themes.forEach((theme) => (theme.isActive = false));
-			themes[idx].isActive = true;
-			localStorage.setItem('activeTheme', idx);
-		} else {
-			return;
-		}
-	}
+  if (themes[idx].isActive) return;
+  if (isCircleExpanded.value) return;
+
+  themes.forEach((theme) => (theme.isActive = false));
+  themes[idx].isActive = true;
+  localStorage.setItem('activeTheme', idx);
+}
 
 	function changeThemeColors() {
 		const root = document.documentElement;
@@ -71,19 +72,37 @@
 		} else {
 			changeActiveTheme(localStorage.getItem('activeTheme'));
 		}
+
+		changeThemeColors(localStorage.getItem('activeTheme'));
 	})
 
-	onUpdated(() => props.hours > 16 ? changeActiveTheme(1) : changeActiveTheme(0));
+	watch(() => props.hours, (newHours) => {
+  if (!isThemesLocked.value) return;
+
+  if (newHours >= 16) {
+    changeActiveTheme(0);
+  } else {
+    changeActiveTheme(1);
+  }
+}, { immediate: true });
 </script>
 
 <template>
 	<div class="container">
-		<div
-			v-for="(theme, i) in themes"
-			:key="theme.name"
-			:class="['theme-icon', theme.name, isActiveThemeIcon(theme)]"
-			@click="() => changeActiveTheme(i)"
-		>
+		<ui-icon
+			:path="isThemesLocked ? 'lock.png' : 'unlock.png'"
+			size="small"
+			class="clickable"
+			@click="isThemesLocked = !isThemesLocked"
+		/>
+		<div :class="['inner-container', isThemesLocked ? 'locked' : null]">
+			<div
+				v-for="(theme, i) in themes"
+				:key="theme.name"
+				:class="['theme-icon', theme.name, isActiveThemeIcon(theme)]"
+				@click="() => changeActiveTheme(i)"
+			>
+			</div>
 		</div>
 	</div>
 	<div
@@ -99,6 +118,12 @@
 		right: 30px;
 		display: flex;
 		align-items: center;
+		column-gap: 20px;
+	}
+
+	.inner-container {
+		display: flex;
+		align-items: center;
 		column-gap: 10px;
 		border-radius: 50px;
 		padding: 7px 10px;
@@ -107,6 +132,13 @@
 		@include tr(0.3, opacity);
 
 		&:hover { opacity: 1; }
+
+		&.locked {
+			opacity: 0.1;
+
+			&, & * { cursor: no-drop; }
+			&:hover { opacity: 0.1; }
+		}
 	}
 
 	.theme-icon {
